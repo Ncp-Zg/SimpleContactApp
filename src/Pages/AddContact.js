@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import { setData } from '../redux/ActionCreators/contactAction';
 
 const AddContact = () => {
 
@@ -10,13 +11,39 @@ const AddContact = () => {
     const [number,setNumber]=useState("");
 
     const contacts = useSelector((state)=>state);
+    const dispatch = useDispatch();
+
+    const history = useHistory();
 
     const handleSubmit = (e)=>{
         e.preventDefault();
 
+        const checkEmail = contacts.find((contact) => contact.email === email && email)
+        const checkNumber = contacts.find((contact) => contact.number === parseInt(number))
+
         if(!email||!number||!name){
             return toast.warning("Please fill in all blanks")
         }
+
+        if(checkEmail){
+            return toast.error("This email is already exist!")
+        }
+
+        if(checkNumber){
+            return toast.error("This number is already exist");
+        }
+
+        const data ={
+            id: contacts[contacts.length-1].id+1,
+            name,
+            number,
+            email,
+        }
+        
+
+        dispatch(setData(data));
+        toast.success("Student added successfully");
+        history.push("/")
     }
 
 
