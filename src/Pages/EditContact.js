@@ -24,8 +24,8 @@ const EditContact = () => {
                            <input type="number" placeholder="Phone Number" className="form-control"/>
                         </div>
                        <div className="form-group d-flex justify-content-around">
-                           <input type="submit" value="Update Student" className="col-md-5 btn btn-dark"/>
-                           <Link to="/" className="col-md-5 btn btn-danger">Cancel</Link>
+                           <input type="submit" value="Update Student" className="col-md-7 btn btn-dark"/>
+                           <Link to="/" className="col-md-4 btn btn-danger">Cancel</Link>
                         </div>
                     </form> 
                 </div>
