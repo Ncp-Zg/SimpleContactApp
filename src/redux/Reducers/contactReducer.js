@@ -1,4 +1,4 @@
-import { ADD_CONTACT } from "../Types/contactTypes";
+import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT } from "../Types/contactTypes";
 
 const initialState=[
     {
@@ -23,6 +23,15 @@ const contactReducer = (state=initialState, action)=>{
         case ADD_CONTACT :
             state = [...state,action.payload];
             return state;
+        case UPDATE_CONTACT :
+            const UpdateState = state.map(contact=>contact.id === action.payload.id ? action.payload:contact);
+            state = UpdateState;
+            return state;
+        case DELETE_CONTACT :
+            const filterContact = state.filter((contact)=>contact.id!==action.payload && contact);
+            state = filterContact;
+            return state;
+
         default:
             return state;
     }
